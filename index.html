@@ -65,18 +65,24 @@
     // Load hint words from gxmaster.xlsx
     function loadHintWords() {
       const file = 'gxmaster.xlsx';
+      console.log("Attempting to load gxmaster.xlsx...");
       fetch(file)
         .then(response => {
-          if (!response.ok) throw new Error('File not found');
+          if (!response.ok) throw new Error(`File not found: ${response.statusText}`);
           return response.arrayBuffer();
         })
         .then(data => {
+          console.log("File loaded successfully. Parsing...");
           const workbook = XLSX.read(new Uint8Array(data), { type: 'array' });
           const sheet = workbook.Sheets[workbook.SheetNames[0]];
           const json = XLSX.utils.sheet_to_json(sheet);
           hintWords = json.map(row => row.Hint || row.Word || '').filter(Boolean);
+          console.log("Loaded hint words:", hintWords);
         })
-        .catch(err => console.error('Error loading gxmaster.xlsx:', err));
+        .catch(err => {
+          console.error('Error loading gxmaster.xlsx:', err);
+          alert('Failed to load gxmaster.xlsx. Please check the file and try again.');
+        });
     }
 
     // Show suggestions based on user input
@@ -87,6 +93,7 @@
 
       if (input.length >= 3) {
         const matches = hintWords.filter(word => word.toLowerCase().startsWith(input));
+        console.log("Matches for input:", input, matches);
 
         if (matches.length > 0) {
           matches.forEach(match => {
@@ -109,9 +116,9 @@
 
     // Hide suggestions when clicking outside
     document.addEventListener('click', (e) => {
-      if (!document.getElementById('suggestionBox').contains(e.target) &&
-        e.target.id !== 'searchBar') {
-        document.getElementById('suggestionBox').style.display = 'none';
+      const suggestionBox = document.getElementById('suggestionBox');
+      if (!suggestionBox.contains(e.target) && e.target.id !== 'searchBar') {
+        suggestionBox.style.display = 'none';
       }
     });
 
