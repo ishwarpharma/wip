@@ -3,253 +3,304 @@
 
 <head>
   <link rel="icon" href="favicon.ico" type="image/x-icon">
-</head>
-    
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ishwar Pharma Gx Search</title>
-    <style>
-        body {
-            font-family: Calibri, sans-serif;
-            font-size: 10pt;
-            text-align: center;
-            background-color: #F7F7F7;
-            margin: 0;
-            padding: 0;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ishwar Pharma Gx Search</title>
+  <style>
+    body {
+      font-family: Calibri, sans-serif;
+      font-size: 10pt;
+      text-align: center;
+      background-color: #F7F7F7;
+      margin: 0;
+      padding: 0;
+    }
 
-        h1 {
-            font-size: 18pt;
-            font-weight: bold;
-            margin: 20px 0;
-            color: #4A90E2;
-        }
+    h1 {
+      font-size: 18pt;
+      font-weight: bold;
+      margin: 20px 0;
+      color: #4A90E2;
+    }
 
-        #searchBar {
-            width: 80%;
-            padding: 12px;
-            font-size: 14pt;
-            border: 2px solid #28A745;
-            border-radius: 10px;
-            margin-bottom: 10px;
-            background: #FFFFFF;
-            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
-        }
+    #searchBar {
+      width: 80%;
+      padding: 12px;
+      font-size: 14pt;
+      border: 2px solid #28A745;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      background: #FFFFFF;
+      box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+    }
 
-        button {
-            padding: 10px 20px;
-            font-size: 14pt;
-            background-color: #4A90E2;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
+    button {
+      padding: 10px 20px;
+      font-size: 14pt;
+      background-color: #4A90E2;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
 
-        button:hover {
-            background-color: #357ABD;
-        }
+    button:hover {
+      background-color: #357ABD;
+    }
 
-        table {
-            width: 100%;
-            max-width: 95%;
-            border-collapse: collapse;
-            margin: 20px auto;
-            table-layout: auto;
-            word-wrap: break-word;
-            background-color: #FFFFFF;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
+    table {
+      width: 100%;
+      max-width: 95%;
+      border-collapse: collapse;
+      margin: 20px auto;
+      table-layout: auto;
+      word-wrap: break-word;
+      background-color: #FFFFFF;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
 
-        table,
-        th,
-        td {
-            border: 1px solid #ddd;
-        }
+    table,
+    th,
+    td {
+      border: 1px solid #ddd;
+    }
 
-        th,
-        td {
-            padding: 12px;
-            text-align: center;
-            font-weight: bold;
-        }
+    th,
+    td {
+      padding: 12px;
+      text-align: center;
+      font-weight: bold;
+    }
 
-        th {
-            background-color: #4A90E2;
-            color: white;
-        }
+    th {
+      background-color: #4A90E2;
+      color: white;
+    }
 
-        tr:nth-child(even) {
-            background-color: #F7F7F7;
-        }
+    tr:nth-child(even) {
+      background-color: #F7F7F7;
+    }
 
-        tr:hover {
-            background-color: #E1F5FE;
-        }
+    tr:hover {
+      background-color: #E1F5FE;
+    }
 
-        .highlight {
-            background-color: yellow;
-            font-weight: bold;
-        }
+    #recordCount {
+      margin: 10px 0;
+      font-weight: bold;
+      color: #333333;
+    }
 
-        .red {
-            color: red;
-            font-weight: bold;
-        }
+    /* Autocomplete Suggestions */
+    #suggestionBox {
+      position: absolute;
+      z-index: 100;
+      background: white;
+      border: 1px solid #ccc;
+      max-height: 150px;
+      overflow-y: auto;
+      display: none;
+      width: 80%;
+    }
 
-        #recordCount {
-            margin: 10px 0;
-            font-weight: bold;
-            color: #333333;
-        }
+    #suggestionBox div {
+      padding: 8px;
+      cursor: pointer;
+    }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            #searchBar {
-                width: 95%;
-                font-size: 12pt;
-            }
+    #suggestionBox div:hover {
+      background-color: #f0f0f0;
+    }
 
-            button {
-                font-size: 12pt;
-            }
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      #searchBar {
+        width: 95%;
+        font-size: 12pt;
+      }
 
-            th,
-            td {
-                font-size: 10pt;
-                padding: 8px;
-            }
+      button {
+        font-size: 12pt;
+      }
 
-            h1 {
-                font-size: 14pt;
-            }
-        }
-    </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+      th,
+      td {
+        font-size: 10pt;
+        padding: 8px;
+      }
+
+      h1 {
+        font-size: 14pt;
+      }
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
 </head>
 
 <body>
-    <h1>✨ Ishwar Pharma Gx Search ✨</h1>
-    <div id="recordCount">Number of records: 0</div>
-    <br>
-    <div style="position: relative; display: inline-block; width: 100%;">
-        <input type="text" id="searchBar" placeholder="🔍 Start typing to search..." oninput="onInputChange()">
-    </div>
-    <br><br>
-    <button onclick="resetSearch()">↺ Reset</button>
-    <br><br>
-    <table id="resultsTable">
-        <thead>
-            <tr>
-                <th>Brand 🎉</th>
-                <th>Company 💼</th>
-                <th>Pack 📦</th>
-                <th>Rate 💸</th>
-                <th>Free Scheme 💵</th>
-                <th>MRP 🎁</th>
-                <th>Content 🌿</th>
-                <th>Case 🗲</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td colspan="8">Waiting for input...</td>
-            </tr>
-        </tbody>
-    </table>
-    <script>
-        let jsonData = [];
+  <h1>✨ Ishwar Pharma Gx Search ✨</h1>
+  <div id="recordCount">Number of records: 0</div>
+  <br>
+  <div style="position: relative; display: inline-block; width: 100%;">
+    <input type="text" id="searchBar" placeholder="🔍 Start typing to search..." oninput="onInputChange()">
+    <div id="suggestionBox"></div>
+  </div>
+  <br><br>
+  <button onclick="resetSearch()">↺ Reset</button>
+  <br><br>
+  <table id="resultsTable">
+    <thead>
+      <tr>
+        <th>Brand 🎉</th>
+        <th>Company 💼</th>
+        <th>Pack 📦</th>
+        <th>Rate 💸</th>
+        <th>Free Scheme 💵</th>
+        <th>MRP 🎁</th>
+        <th>Content 🌿</th>
+        <th>Case 🗲</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td colspan="8">Waiting for input...</td>
+      </tr>
+    </tbody>
+  </table>
+  <script>
+    let jsonData = [];
+    let hintWords = [];
 
-        window.onload = loadData;
+    window.onload = () => {
+      loadData();
+      loadHintWords();
+    };
 
-        function loadData() {
-            const file = '4IshwarApp.xlsx';
-            const reader = new FileReader();
-            fetch(file).then(response => {
-                if (response.ok) return response.blob();
-                else throw new Error('File not found');
-            }).then(blob => {
-                const fileReader = new FileReader();
-                fileReader.onload = (e) => {
-                    const data = new Uint8Array(e.target.result);
-                    const workbook = XLSX.read(data, { type: 'array' });
-                    const sheetName = workbook.SheetNames[0];
-                    const sheet = workbook.Sheets[sheetName];
-                    jsonData = XLSX.utils.sheet_to_json(sheet);
-                    document.getElementById('recordCount').textContent = `Number of records: ${jsonData.length}`;
-                };
-                fileReader.readAsArrayBuffer(blob);
-            }).catch(error => {
-                console.error('Error loading file:', error);
-                document.getElementById('recordCount').textContent = 'Error loading data';
-            });
+    function loadData() {
+      const file = '4IshwarApp.xlsx';
+      fetch(file).then(response => {
+        if (response.ok) return response.blob();
+        else throw new Error('File not found');
+      }).then(blob => {
+        const fileReader = new FileReader();
+        fileReader.onload = (e) => {
+          const data = new Uint8Array(e.target.result);
+          const workbook = XLSX.read(data, { type: 'array' });
+          const sheetName = workbook.SheetNames[0];
+          const sheet = workbook.Sheets[sheetName];
+          jsonData = XLSX.utils.sheet_to_json(sheet);
+          document.getElementById('recordCount').textContent = `Number of records: ${jsonData.length}`;
+        };
+        fileReader.readAsArrayBuffer(blob);
+      }).catch(error => {
+        console.error('Error loading file:', error);
+        document.getElementById('recordCount').textContent = 'Error loading data';
+      });
+    }
+
+    function loadHintWords() {
+      const file = 'gxmaster.xlsx';
+      fetch(file).then(response => {
+        if (response.ok) return response.blob();
+        else throw new Error('Hint file not found');
+      }).then(blob => {
+        const fileReader = new FileReader();
+        fileReader.onload = (e) => {
+          const data = new Uint8Array(e.target.result);
+          const workbook = XLSX.read(data, { type: 'array' });
+          const sheetName = workbook.SheetNames[0];
+          const sheet = workbook.Sheets[sheetName];
+          hintWords = XLSX.utils.sheet_to_json(sheet).map(item => item.Hint || item.Words || '');
+        };
+        fileReader.readAsArrayBuffer(blob);
+      }).catch(error => {
+        console.error('Error loading hint words:', error);
+      });
+    }
+
+    function onInputChange() {
+      const searchBar = document.getElementById('searchBar');
+      const input = searchBar.value.toLowerCase();
+      if (input.length >= 1) {
+        showSuggestions(input);
+        if (input.length >= 3) {
+          search(input);
         }
+      } else {
+        showInitialMessage();
+      }
+    }
 
-        function onInputChange() {
-            const searchBar = document.getElementById('searchBar');
-            const input = searchBar.value.toLowerCase();
-            if (input.length >= 3) {
-                search(input);
-            } else {
-                showInitialMessage();
-            }
-        }
+    function showSuggestions(input) {
+      const suggestionBox = document.getElementById('suggestionBox');
+      suggestionBox.innerHTML = '';
+      const matches = hintWords.filter(word => word.toLowerCase().includes(input));
+      if (matches.length > 0) {
+        suggestionBox.style.display = 'block';
+        matches.forEach(match => {
+          const div = document.createElement('div');
+          div.textContent = match;
+          div.onclick = () => {
+            document.getElementById('searchBar').value = match;
+            suggestionBox.style.display = 'none';
+            search(match);
+          };
+          suggestionBox.appendChild(div);
+        });
+      } else {
+        suggestionBox.style.display = 'none';
+      }
+    }
 
-        function search(input) {
-            const terms = input.split(' ').filter(term => term);
-            const results = jsonData.filter(item => {
-                return terms.every(term => {
-                    return ['BRAND', 'COMPANY', 'CONTENT'].some(key => item[key] && item[key].toString().toLowerCase().includes(term));
-                });
-            });
+    document.addEventListener('click', (event) => {
+      const suggestionBox = document.getElementById('suggestionBox');
+      if (!suggestionBox.contains(event.target) && event.target.id !== 'searchBar') {
+        suggestionBox.style.display = 'none';
+      }
+    });
 
-            results.sort((a, b) => b.BRAND.localeCompare(a.BRAND));
+    function search(input) {
+      const terms = input.split(' ').filter(term => term);
+      const results = jsonData.filter(item => {
+        return terms.every(term => {
+          return ['BRAND', 'COMPANY', 'CONTENT'].some(key => item[key] && item[key].toString().toLowerCase().includes(term));
+        });
+      });
 
-            const resultsTable = document.getElementById('resultsTable').getElementsByTagName('tbody')[0];
-            resultsTable.innerHTML = '';
-            if (results.length === 0) {
-                resultsTable.innerHTML = '<tr><td colspan="8">No records found.</td></tr>';
-            }
-            results.forEach(result => {
-                const row = resultsTable.insertRow();
-                row.insertCell().innerHTML = highlightMatch(result.BRAND, terms);
-                row.insertCell().innerHTML = highlightMatch(result.COMPANY, terms);
-                row.insertCell().textContent = result.PACK || 'N/A';
-                row.insertCell().textContent = isNumeric(result.RATE) ? Number(result.RATE).toFixed(2) : 'N/A';
-                const freeSchemeCell = row.insertCell();
-                freeSchemeCell.textContent = isNumeric(result["Free Scheme"]) ? Number(result["Free Scheme"]).toFixed(2) : 'N/A';
-                freeSchemeCell.classList.add('red');
-                row.insertCell().textContent = isNumeric(result.MRP) ? Number(result.MRP).toFixed(2) : 'N/A';
-                row.insertCell().innerHTML = highlightMatch(result.CONTENT, terms);
-                row.insertCell().textContent = result.CASE || 'N/A';
-            });
-        }
+      results.sort((a, b) => b.BRAND.localeCompare(a.BRAND));
 
-        function resetSearch() {
-            document.getElementById('searchBar').value = '';
-            showInitialMessage();
-        }
+      const resultsTable = document.getElementById('resultsTable').getElementsByTagName('tbody')[0];
+      resultsTable.innerHTML = '';
+      if (results.length === 0) {
+        resultsTable.innerHTML = '<tr><td colspan="8">No records found.</td></tr>';
+      }
+      results.forEach(result => {
+        const row = resultsTable.insertRow();
+        row.insertCell().textContent = result.BRAND || 'N/A';
+        row.insertCell().textContent = result.COMPANY || 'N/A';
+        row.insertCell().textContent = result.PACK || 'N/A';
+        row.insertCell().textContent = isNumeric(result.RATE) ? Number(result.RATE).toFixed(2) : 'N/A';
+        row.insertCell().textContent = isNumeric(result["Free Scheme"]) ? Number(result["Free Scheme"]).toFixed(2) : 'N/A';
+        row.insertCell().textContent = isNumeric(result.MRP) ? Number(result.MRP).toFixed(2) : 'N/A';
+        row.insertCell().textContent = result.CONTENT || 'N/A';
+        row.insertCell().textContent = result.CASE || 'N/A';
+      });
+    }
 
-        function showInitialMessage() {
-            const resultsTable = document.getElementById('resultsTable').getElementsByTagName('tbody')[0];
-            resultsTable.innerHTML = '<tr><td colspan="8">Waiting for input...</td></tr>';
-        }
+    function resetSearch() {
+      document.getElementById('searchBar').value = '';
+      showInitialMessage();
+    }
 
-        function isNumeric(value) {
-            return !isNaN(parseFloat(value)) && isFinite(value);
-        }
+    function showInitialMessage() {
+      const resultsTable = document.getElementById('resultsTable').getElementsByTagName('tbody')[0];
+      resultsTable.innerHTML = '<tr><td colspan="8">Waiting for input...</td></tr>';
+    }
 
-        function highlightMatch(text, terms) {
-            if (!text) return 'N/A';
-            let highlightedText = text;
-            terms.forEach(term => {
-                const regex = new RegExp(`(${term})`, 'gi');
-                highlightedText = highlightedText.toString().replace(regex, '<span class="highlight">$1</span>');
-            });
-            return highlightedText;
-        }
-    </script>
+    function isNumeric(value) {
+      return !isNaN(parseFloat(value)) && isFinite(value);
+    }
+  </script>
 </body>
 
 </html>
